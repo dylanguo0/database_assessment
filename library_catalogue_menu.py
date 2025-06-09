@@ -3,7 +3,7 @@ import sqlite3
 from tabulate import tabulate
 
 # This is the filename of the database to be used
-DB_NAME = 'cars_relationships.db'
+DB_NAME = 'library_catalogue.db'
 
 def print_query(view_name:str):
     ''' Prints the specified view from the database in a table '''
@@ -21,3 +21,5 @@ def print_query(view_name:str):
     # Print the results in a table with the headings
     print(tabulate(results,headings))
     db.close()
+
+print_query('all_data')
