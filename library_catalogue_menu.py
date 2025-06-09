@@ -41,50 +41,36 @@ def print_parameter_query(fields:str, where:str, parameter):
     print(tabulate(results,fields.split(",")))
     db.close()  
 
-
-menu_choice = ''
-print('Welcome to the Library database\n')
-while menu_choice != 'EXIT':
-    menu_choice = input('Type the number for the information you want:\n'
-                        '1: All info about the borrowings\n'
-                        '2: All borrowings in alphabetical order by surname then firstname\n'
-                        '3: All books in alphabetical order by book name\n'
-                        '4: Everyone in the database in by surname then first name\n'
-                        '5: Find all books published by a certain publisher\n'
-                        '6: Find all books with a certain genre\n'
-                        '7: All borrowings which are overdue\n'
-                        '8: All borrowings which are nearly overdue\n'
-                        'EXIT: To exit the menu\n\n'
-                        'Type option here: ')
-    menu_choice = menu_choice.upper()
-    if menu_choice == '1':
+while True:
+    msg ="Please choose a query"
+    title = "Welcome to the Library database"
+    choices = ["All info about the borrowings", 
+               "All borrowings in alphabetical order by surname then firstname", 
+               "All books in alphabetical order by book name", 
+               "Everyone in the database in by surname then first name",
+               "Find all books published by a certain publisher",
+               "Find all books with a certain genre",
+               "All borrowings which are overdue",
+               "All borrowings which are nearly overdue",
+               "Exit the menu"]
+    choice = choicebox(msg, title, choices)
+    if choice == 'All info about the borrowings':
         print_query('all_data')
-    elif menu_choice == '2':
+    elif choice == 'All borrowings in alphabetical order by surname then firstname':
         print_query('alphabetical_borrowings')
-    elif menu_choice == '3':
+    elif choice == 'All books in alphabetical order by book name':
         print_query('alphabetical_books')
-    elif menu_choice == '4':
+    elif choice == 'Everyone in the database in by surname then first name':
         print_query('alphabetical_names')
-    elif menu_choice == '5':
+    elif choice == 'Find all books published by a certain publisher':
         publisher = input('\nWhich make publisher do you want to see: ')
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
-    elif menu_choice == '6':
+    elif choice == 'Find all books with a certain genre':
         genre = input('\nWhich make genre do you want to see: ').title()
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "genre = ? ORDER BY book_title",genre)
-    elif menu_choice == '7':
+    elif choice == 'All borrowings which are overdue':
         print_query('overdue')
-    elif menu_choice == '8':
+    elif choice == 'All borrowings which are nearly overdue':
         print_query('nearly_overdue')
-    print('')
-
-msg ="Please choose a query"
-title = "Welcome to the Library database"
-choices = ["All info about the borrowings", 
-           "All borrowings in alphabetical order by surname then firstname", 
-           "All books in alphabetical order by book name", 
-           "Everyone in the database in by surname then first name",
-           "Find all books published by a certain publisher",
-           "Find all books with a certain genre",
-           "All borrowings which are overdue",
-           "All borrowings which are nearly overdue"]
-choice = choicebox(msg, title, choices)
+    else:
+        break
