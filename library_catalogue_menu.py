@@ -24,7 +24,7 @@ def print_query(view_name:str):
     db.close()
 
 # This is the SQL to connect to all the tables in the database
-TABLES = (" fast_cars "
+TABLES = (" borrowing "
            "LEFT JOIN person_info ON borrowing.library_card = person_info.library_card "
            "LEFT JOIN books ON borrowing.isbn = books.isbn "
            "LEFT JOIN genres ON books.genre_id = genres.genre_id ")
@@ -49,7 +49,7 @@ while menu_choice != 'EXIT':
                         '2: All borrowings in alphabetical order\n'
                         '3: All books in alphabetical names\n'
                         '4: Everyone in the database in alphabetical order\n'
-                        '5: All books published by Bloomsbury\n'
+                        '5: Find all books published by a certain publisher\n'
                         '6: All books with the magic genre\n'
                         '7: All borrowins which are overdue\n'
                         '8: All borrowins which are nearly overdue\n'
@@ -65,7 +65,8 @@ while menu_choice != 'EXIT':
     elif menu_choice == '4':
         print_query('alphabetical_names')
     elif menu_choice == '5':
-        print_query('bloomsbury_books')
+        publisher = input('\nWhich make publisher do you want to see: ')
+        print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
     elif menu_choice == '6':
         print_query('magic_books')
     elif menu_choice == '7':
