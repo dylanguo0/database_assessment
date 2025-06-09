@@ -46,9 +46,9 @@ print('Welcome to the Library database\n')
 while menu_choice != 'EXIT':
     menu_choice = input('Type the number for the information you want:\n'
                         '1: All info about the borrowings\n'
-                        '2: All borrowings in alphabetical order\n'
-                        '3: All books in alphabetical names\n'
-                        '4: Everyone in the database in alphabetical order\n'
+                        '2: All borrowings in alphabetical order by surname then firstname\n'
+                        '3: All books in alphabetical order by book name\n'
+                        '4: Everyone in the database in by surname then first name\n'
                         '5: Find all books published by a certain publisher\n'
                         '6: Find all books with a certain genre\n'
                         '7: All borrowins which are overdue\n'
