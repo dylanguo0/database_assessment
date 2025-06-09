@@ -50,7 +50,7 @@ while menu_choice != 'EXIT':
                         '3: All books in alphabetical names\n'
                         '4: Everyone in the database in alphabetical order\n'
                         '5: Find all books published by a certain publisher\n'
-                        '6: All books with the magic genre\n'
+                        '6: Find all books with a certain genre\n'
                         '7: All borrowins which are overdue\n'
                         '8: All borrowins which are nearly overdue\n'
                         'EXIT: To exit the menu\n\n'
@@ -68,7 +68,8 @@ while menu_choice != 'EXIT':
         publisher = input('\nWhich make publisher do you want to see: ')
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
     elif menu_choice == '6':
-        print_query('magic_books')
+        genre = input('\nWhich make genre do you want to see: ').title()
+        print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "genre = ? ORDER BY book_title",genre)
     elif menu_choice == '7':
         print_query('overdue')
     elif menu_choice == '8':
