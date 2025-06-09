@@ -1,6 +1,7 @@
 # Import the libraries to connect to the database and present the information in tables
 import sqlite3
 from tabulate import tabulate
+from easygui import *
 
 # This is the filename of the database to be used
 DB_NAME = 'library_catalogue.db'
@@ -51,8 +52,8 @@ while menu_choice != 'EXIT':
                         '4: Everyone in the database in by surname then first name\n'
                         '5: Find all books published by a certain publisher\n'
                         '6: Find all books with a certain genre\n'
-                        '7: All borrowins which are overdue\n'
-                        '8: All borrowins which are nearly overdue\n'
+                        '7: All borrowings which are overdue\n'
+                        '8: All borrowings which are nearly overdue\n'
                         'EXIT: To exit the menu\n\n'
                         'Type option here: ')
     menu_choice = menu_choice.upper()
@@ -75,3 +76,15 @@ while menu_choice != 'EXIT':
     elif menu_choice == '8':
         print_query('nearly_overdue')
     print('')
+
+msg ="Please choose a query"
+title = "Welcome to the Library database"
+choices = ["All info about the borrowings", 
+           "All borrowings in alphabetical order by surname then firstname", 
+           "All books in alphabetical order by book name", 
+           "Everyone in the database in by surname then first name",
+           "Find all books published by a certain publisher",
+           "Find all books with a certain genre",
+           "All borrowings which are overdue",
+           "All borrowings which are nearly overdue"]
+choice = choicebox(msg, title, choices)
