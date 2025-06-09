@@ -23,6 +23,24 @@ def print_query(view_name:str):
     print(tabulate(results,headings))
     db.close()
 
+# This is the SQL to connect to all the tables in the database
+TABLES = (" fast_cars "
+           "LEFT JOIN person_info ON borrowing.library_card = person_info.library_card "
+           "LEFT JOIN books ON borrowing.isbn = books.isbn "
+           "LEFT JOIN genres ON books.genre_id = genres.genre_id ")
+
+def print_parameter_query(fields:str, where:str, parameter):
+    """ Prints the results for a parameter query in tabular form. """
+    print('')
+    db = sqlite3.connect(DB_NAME)
+    cursor = db.cursor()
+    sql = ("SELECT " + fields + " FROM " + TABLES + " WHERE " + where)
+    cursor.execute(sql,(parameter,))
+    results = cursor.fetchall()
+    print(tabulate(results,fields.split(",")))
+    db.close()  
+
+
 menu_choice = ''
 print('Welcome to the Library database\n')
 while menu_choice != 'EXIT':
