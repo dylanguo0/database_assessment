@@ -25,7 +25,7 @@ def print_query(view_name:str):
     db.close()
 
 # This is the SQL to connect to all the tables in the database
-TABLES = (" borrowing "
+BORROWING_TABLES = (" borrowing "
            "LEFT JOIN person_info ON borrowing.library_card = person_info.library_card "
            "LEFT JOIN books ON borrowing.isbn = books.isbn "
            "LEFT JOIN genres ON books.genre_id = genres.genre_id ")
@@ -39,7 +39,7 @@ def print_parameter_query(fields:str, where:str, parameter):
     cursor.execute(sql,(parameter,))
     results = cursor.fetchall()
     print(tabulate(results,fields.split(",")))
-    db.close()  
+    db.close()
 
 while True:
     msg ="Please choose a query"
@@ -51,8 +51,7 @@ while True:
                "Find all books published by a certain publisher",
                "Find all books with a certain genre",
                "All borrowings which are overdue",
-               "All borrowings which are nearly overdue",
-               "Exit the menu"]
+               "All borrowings which are nearly overdue"]
     choice = choicebox(msg, title, choices)
     if choice == 'All info about the borrowings':
         print_query('all_data')
@@ -63,10 +62,10 @@ while True:
     elif choice == 'Everyone in the database in by surname then first name':
         print_query('alphabetical_names')
     elif choice == 'Find all books published by a certain publisher':
-        publisher = input('\nWhich make publisher do you want to see: ')
+        publisher = input('\nWhich publisher do you want to see: ')
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
     elif choice == 'Find all books with a certain genre':
-        genre = input('\nWhich make genre do you want to see: ').title()
+        genre = input('\nWhich genre do you want to see: ').title()
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "genre = ? ORDER BY book_title",genre)
     elif choice == 'All borrowings which are overdue':
         print_query('overdue')
