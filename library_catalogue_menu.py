@@ -22,4 +22,18 @@ def print_query(view_name:str):
     print(tabulate(results,headings))
     db.close()
 
-print_query('all_data')
+menu_choice = ''
+print('Welcome to the Library database\n')
+while menu_choice != 'EXIT':
+    menu_choice = input('Type the number for the information you want:\n'
+                        '1: All info about the borrowings\n'
+                        '2: All borrowins in alphabetical order\n'
+                        '3: All books in alphabetical names\n'
+                        '4: Everyone in the database in alphabetical order\n'
+                        '5: All books published by Bloomsbury\n'
+                        '6: All books with the magic genre\n'
+                        '7: All borrowins which are overdue\n'
+                        '8: All borrowins which are nearly overdue\n'
+                        'EXIT: To exit the menu\n\n'
+                        'Type option here: ')
+    menu_choice = menu_choice.upper()
