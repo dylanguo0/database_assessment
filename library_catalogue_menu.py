@@ -7,6 +7,7 @@ DB_NAME = 'library_catalogue.db'
 
 def print_query(view_name:str):
     ''' Prints the specified view from the database in a table '''
+    print('')
     # Set up the connection to the database
     db = sqlite3.connect(DB_NAME)
     cursor = db.cursor()
@@ -27,7 +28,7 @@ print('Welcome to the Library database\n')
 while menu_choice != 'EXIT':
     menu_choice = input('Type the number for the information you want:\n'
                         '1: All info about the borrowings\n'
-                        '2: All borrowins in alphabetical order\n'
+                        '2: All borrowings in alphabetical order\n'
                         '3: All books in alphabetical names\n'
                         '4: Everyone in the database in alphabetical order\n'
                         '5: All books published by Bloomsbury\n'
@@ -37,3 +38,20 @@ while menu_choice != 'EXIT':
                         'EXIT: To exit the menu\n\n'
                         'Type option here: ')
     menu_choice = menu_choice.upper()
+    if menu_choice == '1':
+        print_query('all_data')
+    elif menu_choice == '2':
+        print_query('alphabetical_borrowings')
+    elif menu_choice == '3':
+        print_query('alphabetical_books')
+    elif menu_choice == '4':
+        print_query('alphabetical_names')
+    elif menu_choice == '5':
+        print_query('bloomsbury_books')
+    elif menu_choice == '6':
+        print_query('magic_books')
+    elif menu_choice == '7':
+        print_query('overdue')
+    elif menu_choice == '8':
+        print_query('nearly_overdue')
+    print('')
