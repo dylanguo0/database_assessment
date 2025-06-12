@@ -53,7 +53,8 @@ while True:
                "Find all books with a certain genre",
                "All borrowings which are overdue",
                "All borrowings which are nearly overdue",
-               "Number of borrowed and overdue books each person has"]
+               "Number of borrowed and overdue books each person has",
+               "Find a certain book"]
     choice = choicebox(msg, title, choices)
     if choice == 'All info about the borrowings':
         print_query('all_data')
@@ -97,5 +98,11 @@ while True:
         print_query('nearly_overdue')
     elif choice == 'Number of borrowed and overdue books each person has':
         print_query('number_borrowed')
+    elif choice == 'Find a certain book':
+        msg = "Type in the name of a book"
+        title = "Find a certain book"
+        book = enterbox(msg, title)
+        table = BOOKS_TABLES
+        print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "book_title = ? ORDER BY book_title",book)
     else:
         break
