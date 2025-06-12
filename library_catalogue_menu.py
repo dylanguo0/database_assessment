@@ -76,11 +76,19 @@ while True:
                    "St. Martin's Griffin",
                    "Ten Speed Press",
                    "Usborne Publishing Ltd"]
-        choice = choicebox(msg, title, choices)
+        publisher = choicebox(msg, title, choices)
         table = BOOKS_TABLES
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
     elif choice == 'Find all books with a certain genre':
-        genre = input('\nWhich genre do you want to see: ').title()
+        msg = "Which genre do you want to see?"
+        title = "Pick a genre"
+        choices = ["Cooking",
+                  "Fantasy",
+                  "Magic",
+                  "Monsters",
+                  "Nonfiction",
+                  "NZ Fiction"]
+        genre = choicebox(msg, title, choices)
         table = BOOKS_TABLES
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "genre = ? ORDER BY book_title",genre)
     elif choice == 'All borrowings which are overdue':
