@@ -64,7 +64,19 @@ while True:
     elif choice == 'Everyone in the database in by surname then first name':
         print_query('alphabetical_names')
     elif choice == 'Find all books published by a certain publisher':
-        publisher = input('\nWhich publisher do you want to see: ')
+        msg = "Which publisher do you want to see?"
+        title = "Pick a publisher"
+        choices = ["Bloomsbury",
+                   "David Bateman Ltd",
+                   "Hardie Grant Children's Publishing",
+                   "Hyperion",
+                   "Murdoch Books",
+                   "Penguin Books",
+                   "Penguin Random House"
+                   "St. Martin's Griffin",
+                   "Ten Speed Press",
+                   "Usborne Publishing Ltd"]
+        choice = choicebox(msg, title, choices)
         table = BOOKS_TABLES
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
     elif choice == 'Find all books with a certain genre':
