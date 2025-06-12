@@ -8,7 +8,6 @@ DB_NAME = 'library_catalogue.db'
 
 def print_query(view_name:str):
     ''' Prints the specified view from the database in a table '''
-    print('')
     # Set up the connection to the database
     db = sqlite3.connect(DB_NAME)
     cursor = db.cursor()
@@ -21,7 +20,7 @@ def print_query(view_name:str):
     cursor.execute(field_names)
     headings = list(sum(cursor.fetchall(),()))
     # Print the results in a table with the headings
-    print(tabulate(results,headings))
+    codebox("Here are the results:", "Results", tabulate(results,headings))
     db.close()
 
 # This is the SQL to connect to all the tables in the database
@@ -35,13 +34,12 @@ BOOKS_TABLES = (" books "
 
 def print_parameter_query(fields:str, where:str, parameter):
     """ Prints the results for a parameter query in tabular form. """
-    print('')
     db = sqlite3.connect(DB_NAME)
     cursor = db.cursor()
     sql = ("SELECT " + fields + " FROM " + table + " WHERE " + where)
     cursor.execute(sql,(parameter,))
     results = cursor.fetchall()
-    print(tabulate(results,fields.split(",")))
+    codebox("Here are the results:", "Results", tabulate(results,fields.split(",")))
     db.close()
 
 while True:
