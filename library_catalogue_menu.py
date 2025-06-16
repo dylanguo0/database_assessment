@@ -42,6 +42,7 @@ def print_parameter_query(fields:str, where:str, parameter):
     codebox("Here are the results:", "Results", tabulate(results,fields.split(",")))
     db.close()
 
+book_list = []
 while True:
     msg ="Please choose a query"
     title = "Welcome to the Library database"
@@ -54,7 +55,8 @@ while True:
                "All borrowings which are overdue",
                "All borrowings which are nearly overdue",
                "Number of borrowed and overdue books each person has",
-               "Find a certain book"]
+               "Find a certain book",
+               "Add a new book"]
     choice = choicebox(msg, title, choices)
     if choice == 'All info about the borrowings':
         print_query('all_data')
@@ -104,5 +106,27 @@ while True:
         book = enterbox(msg, title)
         table = BOOKS_TABLES
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "book_title = ? ORDER BY book_title",book)
+    elif choice == 'Add a new book':
+        db = sqlite3.connect(DB_NAME)
+        cursor = db.cursor()
+        isbn = input("ISBN: ")
+        book_list.append(isbn)
+        book_title = input("Book title: ")
+        book_list.append(book_title)
+        genre_id = input("Genre id: ")
+        book_list.append(genre_id)
+        author_surname = input("Author's surname: ")
+        book_list.append(author_surname)
+        author_first_name = input("Author's first name: ")
+        book_list.append(author_first_name)
+        publisher = input("Publisher: ")
+        book_list.append(publisher)
+        publication_date = input("Publication date (yyyy-mm-dd): ")
+        book_list.append(publication_date)
+        insert = '''INSERT INTO books(isbn, book_title, genre_id, author_surname, author_first_name, publisher, publication_date)
+                VALUES(? ,? ,? ,? ,? ,? ,?)'''
+        cursor.execute(insert, book_list)
+        db.commit()
+        db.close()
     else:
         break
