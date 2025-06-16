@@ -46,10 +46,10 @@ while True:
     msg ="Please choose a query"
     title = "Welcome to the Library database"
     choices = ["All info about the borrowings", 
-               "All borrowings in alphabetical order by surname then firstname", 
-               "All books in alphabetical order by book name", 
-               "Everyone in the database in by surname then first name",
-               "Find all books published by a certain publisher",
+               "All borrowings order by surname", 
+               "All books order by book name", 
+               "Every borrower ordered by surname",
+               "Find all books by a certain publisher",
                "Find all books with a certain genre",
                "All borrowings which are overdue",
                "All borrowings which are nearly overdue",
@@ -58,13 +58,13 @@ while True:
     choice = choicebox(msg, title, choices)
     if choice == 'All info about the borrowings':
         print_query('all_data')
-    elif choice == 'All borrowings in alphabetical order by surname then firstname':
+    elif choice == 'All borrowings order by surname':
         print_query('alphabetical_borrowings')
-    elif choice == 'All books in alphabetical order by book name':
+    elif choice == 'All books order by book name':
         print_query('alphabetical_books')
-    elif choice == 'Everyone in the database in by surname then first name':
+    elif choice == 'Every borrower ordered by surname':
         print_query('alphabetical_names')
-    elif choice == 'Find all books published by a certain publisher':
+    elif choice == 'Find all books by a certain publisher':
         msg = "Which publisher do you want to see?"
         title = "Pick a publisher"
         choices = ["Bloomsbury",
@@ -73,7 +73,7 @@ while True:
                    "Hyperion",
                    "Murdoch Books",
                    "Penguin Books",
-                   "Penguin Random House"
+                   "Penguin Random House",
                    "St. Martin's Griffin",
                    "Ten Speed Press",
                    "Usborne Publishing Ltd"]
