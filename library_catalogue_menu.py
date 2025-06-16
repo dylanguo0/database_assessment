@@ -42,9 +42,11 @@ def print_parameter_query(fields:str, where:str, parameter):
     codebox("Here are the results:", "Results", tabulate(results,fields.split(",")))
     db.close()
 
-book_list = []
+# This while loop will keep asking the user to select a query until the exit it
 while True:
-    msg ="Please choose a query"
+
+    # This choicebox will give the user a range of queries to pick from
+    msg = "Please choose a query"
     title = "Welcome to the Library database"
     choices = ["All info about the borrowings", 
                "All borrowings order by surname", 
@@ -59,6 +61,8 @@ while True:
                "Add a new book",
                "Remove a book"]
     choice = choicebox(msg, title, choices)
+
+    # These if statements will check which query the user has picked and display the table for it
     if choice == 'All info about the borrowings':
         print_query('all_data')
     elif choice == 'All borrowings order by surname':
@@ -68,6 +72,8 @@ while True:
     elif choice == 'Every borrower ordered by surname':
         print_query('alphabetical_names')
     elif choice == 'Find all books by a certain publisher':
+
+        # This parameter query will ask the user for a certain publisher and display that information
         msg = "Which publisher do you want to see?"
         title = "Pick a publisher"
         choices = ["Bloomsbury",
@@ -84,6 +90,8 @@ while True:
         table = BOOKS_TABLES
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "publisher = ? ORDER BY book_title",publisher)
     elif choice == 'Find all books with a certain genre':
+
+        # This parameter query will ask the user for a certain genre and display that information
         msg = "Which genre do you want to see?"
         title = "Pick a genre"
         choices = ["Cooking",
@@ -102,12 +110,16 @@ while True:
     elif choice == 'Number of borrowed and overdue books each person has':
         print_query('number_borrowed')
     elif choice == 'Find a certain book':
+
+        # This parameter query will ask the user for a certain book and display that information
         msg = "Type in the name of a book"
         title = "Find a certain book"
         book = enterbox(msg, title)
         table = BOOKS_TABLES
         print_parameter_query("book_title, genre, author_surname, author_first_name, publisher, publication_date", "book_title = ? ORDER BY book_title",book)
     elif choice == 'Add a new book':
+
+        # This query will ask the user for book information and add that as a new row into the books table
         db = sqlite3.connect(DB_NAME)
         cursor = db.cursor()
         msg = "Enter book information"
@@ -121,6 +133,8 @@ while True:
         db.commit()
         db.close()
     elif choice == 'Remove a book':
+
+        # This query will ask the user for a book's ISBN and remove that book from the books table
         msg = "Type in the book's ISBN"
         title = "Remove a book"
         isbn = enterbox(msg, title)
@@ -130,5 +144,7 @@ while True:
         cursor.execute(delete, (isbn,))
         db.commit()
         db.close()
+
+    # This will break the loop when the user presses cancel
     else:
         break
