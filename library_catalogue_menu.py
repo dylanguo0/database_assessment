@@ -56,7 +56,8 @@ while True:
                "All borrowings which are nearly overdue",
                "Number of borrowed and overdue books each person has",
                "Find a certain book",
-               "Add a new book"]
+               "Add a new book",
+               "Remove a book"]
     choice = choicebox(msg, title, choices)
     if choice == 'All info about the borrowings':
         print_query('all_data')
@@ -117,6 +118,16 @@ while True:
         insert = '''INSERT INTO books(isbn, book_title, genre_id, author_surname, author_first_name, publisher, publication_date)
                 VALUES(? ,? ,? ,? ,? ,? ,?)'''
         cursor.execute(insert, fieldValues)
+        db.commit()
+        db.close()
+    elif choice == 'Remove a book':
+        msg = "Type in the book's ISBN"
+        title = "Remove a book"
+        isbn = enterbox(msg, title)
+        db = sqlite3.connect(DB_NAME)
+        cursor = db.cursor()
+        delete = "DELETE FROM books WHERE isbn = ?"
+        cursor.execute(delete, (isbn,))
         db.commit()
         db.close()
     else:
